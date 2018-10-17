@@ -20,24 +20,27 @@ form = """
            margin: 10px 0;
            width: 540px;
            height: 120px;
-
        }
     </style>
   </head>
   <body>  
-    <form action="/caesar" method="post">
+    <form method="post">
       <label for ="rot">Rotate by:</label>
       <input name="rot" type="text" value="0" />
-    </form>
-    <br>
-    <textarea form="text-area" name="text">
+      <textarea form="text-area" name="text"> </textarea>
       <input type="submit" />
-    </textarea>
+    </form>
 
   </body>
 </html>
-  """
+"""
 @app.route("/")
 def index():
-    #caesar_form = request.form[rot]
-    return form
+  return form
+
+#@app.route("/caesar", methods=['POST'])
+#def caesar():
+    #rot_form = request.form['rot']
+    #text_field = request.form['text']
+    #return rot_form
+app.run()
