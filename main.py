@@ -4,6 +4,20 @@ from caesar import rotate_string
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+page_header = """
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web-Caesar</title>
+  </head>
+  <body>
+"""
+
+page_footer = """
+    </body>
+</html>
+"""
+
 form = """
 <!doctype html>
 <html>
@@ -25,10 +39,10 @@ form = """
     </style>
   </head>
   <body>  
-    <form method="post">
+    <form action="/" method="post">
       <label for ="rot">Rotate by:</label>
       <input name="rot" type="text" value="0" />
-      <textarea form="text-area" name="text"> </textarea>
+      <textarea name="text"> </textarea>
       <input type="submit" />
     </form>
 
@@ -42,15 +56,15 @@ def index():
 @app.route("/", methods=['POST'])
 def encrypt():
 
-    rot = request.form['rot'] 
-    rot = int(rot)
+    user_rot = request.form['rot'] 
+    user_rot = int(user_rot)
     
-    text = request.form['text']
+    user_text = request.form['text']
 
-    encrypted = caesar.rotate_string(text, rot)
+    encrypted = rotate_string(user_text, user_rot)
 
     encrypted_element = "<h1>" + encrypted + "</h1>"
-    content = form + encrypted_element
+    content = page_header + encrypted_element + page_footer
 
 
     return content
