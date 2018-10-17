@@ -42,13 +42,17 @@ def index():
 @app.route("/", methods=['POST'])
 def encrypt():
 
-    rot = request.form['rot']
+    rot = request.form['rot'] 
     rot = int(rot)
     
     text = request.form['text']
 
     encrypted = caesar.rotate_string(text, rot)
 
-    return "<h1>" + encrypted + "</h1>"
+    encrypted_element = "<h1>" + encrypted + "</h1>"
+    content = form + encrypted_element
+
+
+    return content
 
 app.run()
